@@ -12,13 +12,29 @@ export default async function HomePage() {
   return (
     <div className="content-grid">
       <section className="full-bleed relative min-h-[88svh] overflow-hidden">
+        <video
+          className="absolute inset-0 h-full w-full object-cover motion-reduce:hidden"
+          autoPlay
+          muted
+          loop
+          playsInline
+          poster="/images/mas-borras-home.png"
+          aria-hidden="true"
+        >
+          <source
+            src="/videos/mas-borras-home-mobile.mp4"
+            type="video/mp4"
+            media="(max-width: 767px)"
+          />
+          <source src="/videos/mas-borras-home-desktop.mp4" type="video/mp4" />
+        </video>
         <Image
           src="/images/mas-borras-home.png"
           alt="El Mas de Borràs entre montañas y árboles de otoño al atardecer"
           fill
           priority
           sizes="100vw"
-          className="object-cover"
+          className="hidden object-cover motion-reduce:block"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-[#211a12]/72 via-[#211a12]/38 to-transparent" />
         <div className="relative mx-auto flex min-h-[88svh] max-w-6xl items-center px-4 py-20 sm:px-6">
