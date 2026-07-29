@@ -1,0 +1,74 @@
+@import "tailwindcss";
+
+:root {
+  --background: #fbf7ef;
+  --foreground: #2f2a24;
+  --muted: #70675d;
+  --surface: #fffdf8;
+  --surface-soft: #f4ecdf;
+  --line: #ded1be;
+  --olive: #566b45;
+  --olive-dark: #34472f;
+  --sage: #c9d3bd;
+  --terracotta: #9a5c3f;
+  --clay: #d7aa80;
+  --mist: #dfe8e3;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-surface: var(--surface);
+  --color-surface-soft: var(--surface-soft);
+  --color-line: var(--line);
+  --color-olive: var(--olive);
+  --color-olive-dark: var(--olive-dark);
+  --color-sage: var(--sage);
+  --color-terracotta: var(--terracotta);
+  --color-clay: var(--clay);
+  --color-mist: var(--mist);
+  --font-sans: var(--font-geist-sans);
+  --font-serif: var(--font-display);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--sage);
+  color: var(--foreground);
+}
+
+a {
+  text-underline-offset: 0.2em;
+}
+
+:focus-visible {
+  outline: 3px solid var(--terracotta);
+  outline-offset: 3px;
+}
+
+.content-grid {
+  display: grid;
+  grid-template-columns:
+    [full-start] minmax(1rem, 1fr)
+    [content-start] minmax(0, 72rem)
+    [content-end] minmax(1rem, 1fr)
+    [full-end];
+}
+
+.content-grid > * {
+  grid-column: content;
+}
+
+.full-bleed {
+  grid-column: full;
+}
+
+.soft-shadow {
+  box-shadow: 0 24px 70px rgb(67 52 37 / 0.12);
+}
