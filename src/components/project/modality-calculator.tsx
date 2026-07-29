@@ -33,6 +33,9 @@ export function ModalityCalculator({ project }: { project: Project }) {
   const [workOptionId, setWorkOptionId] = useState<string | undefined>(
     firstModality?.defaultWorkOptionId ?? firstModality?.workOptions[0]?.id,
   );
+  const [dietaryChoice, setDietaryChoice] = useState<"vegetarian" | "omnivore">(
+    "vegetarian",
+  );
 
   const selectedRoom =
     selectedModality.roomOptions.find((option) => option.id === roomOptionId) ??
@@ -205,6 +208,30 @@ export function ModalityCalculator({ project }: { project: Project }) {
             ))}
           </OptionGroup>
 
+          {selectedMeal && selectedMeal.pricePerDayCents > 0 ? (
+            <OptionGroup
+              title="Preferencia de menú"
+              icon={<Utensils className="h-4 w-4" aria-hidden="true" />}
+            >
+              <ChoiceCard
+                name="dietary-choice"
+                checked={dietaryChoice === "vegetarian"}
+                onChange={() => setDietaryChoice("vegetarian")}
+                title="Vegetariano"
+                description="Menú sin carne ni pescado. Las alergias o necesidades concretas se revisarán en la solicitud."
+                price="Mismo precio"
+              />
+              <ChoiceCard
+                name="dietary-choice"
+                checked={dietaryChoice === "omnivore"}
+                onChange={() => setDietaryChoice("omnivore")}
+                title="Omnívoro"
+                description="Menú general de la casa, sujeto a disponibilidad y organización de la estancia."
+                price="Mismo precio"
+              />
+            </OptionGroup>
+          ) : null}
+
           <OptionGroup
             title="Ritmo de colaboración"
             icon={<Clock className="h-4 w-4" aria-hidden="true" />}
@@ -286,6 +313,14 @@ export function ModalityCalculator({ project }: { project: Project }) {
                 {selectedWork?.label ?? "Por acordar"}
               </dd>
             </div>
+            {selectedMeal && selectedMeal.pricePerDayCents > 0 ? (
+              <div className="flex justify-between gap-4">
+                <dt>Preferencia</dt>
+                <dd className="font-semibold text-foreground">
+                  {dietaryChoice === "vegetarian" ? "Vegetariano" : "Omnívoro"}
+                </dd>
+              </div>
+            ) : null}
           </dl>
         ) : null}
         <p className="mt-3 flex items-start gap-2 text-sm leading-6 text-muted">

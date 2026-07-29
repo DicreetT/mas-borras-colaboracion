@@ -15,8 +15,13 @@ export const projectFormSchema = z.object({
   sharedRoomPricePerNight: z.number().min(0).max(300),
   privateRoomPricePerNight: z.number().min(0).max(300),
   breakfastPricePerDay: z.number().min(0).max(80),
+  lunchPricePerDay: z.number().min(0).max(100),
+  dinnerPricePerDay: z.number().min(0).max(100),
+  coffeeCornerPricePerDay: z.number().min(0).max(80),
   breakfastDinnerPricePerDay: z.number().min(0).max(120),
   fullBoardPricePerDay: z.number().min(0).max(160),
+  vegetarianMenuAvailable: z.boolean(),
+  omnivoreMenuAvailable: z.boolean(),
   conditions: z.string().min(10, "Incluye condiciones particulares."),
 });
 

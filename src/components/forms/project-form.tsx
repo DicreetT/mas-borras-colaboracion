@@ -26,8 +26,13 @@ const defaultValues: ProjectFormValues = {
   sharedRoomPricePerNight: 0,
   privateRoomPricePerNight: 16,
   breakfastPricePerDay: 8,
+  lunchPricePerDay: 14,
+  dinnerPricePerDay: 13,
+  coffeeCornerPricePerDay: 6,
   breakfastDinnerPricePerDay: 19,
   fullBoardPricePerDay: 24,
+  vegetarianMenuAvailable: true,
+  omnivoreMenuAvailable: true,
   conditions: "La solicitud requiere revisión del equipo antes de confirmar plaza.",
 };
 
@@ -60,6 +65,9 @@ export function ProjectForm({ project }: { project?: Project }) {
           (project.modalities[0]?.mealOptions.find(
             (option) => option.planType === "breakfast",
           )?.pricePerDayCents ?? 0) / 100,
+        lunchPricePerDay: 14,
+        dinnerPricePerDay: 13,
+        coffeeCornerPricePerDay: 6,
         breakfastDinnerPricePerDay:
           (project.modalities[0]?.mealOptions.find(
             (option) => option.planType === "breakfast_dinner",
@@ -68,6 +76,8 @@ export function ProjectForm({ project }: { project?: Project }) {
           (project.modalities[0]?.mealOptions.find(
             (option) => option.planType === "full_board",
           )?.pricePerDayCents ?? 0) / 100,
+        vegetarianMenuAvailable: true,
+        omnivoreMenuAvailable: true,
         conditions: project.modalities[0]?.conditions ?? defaultValues.conditions,
       }
     : defaultValues;
@@ -239,9 +249,31 @@ export function ProjectForm({ project }: { project?: Project }) {
         <div>
           <h2 className="text-lg font-semibold">Comidas disponibles</h2>
           <p className="mt-1 text-sm leading-6 text-muted">
-            Estos importes alimentan la calculadora: sin comidas, desayuno,
-            desayuno y cena, o menú completo.
+            Estos importes alimentan la calculadora y dejan claro qué puede
+            ofrecerse en cada proyecto: desayuno, comida, cena, coffee corner o
+            combinaciones.
           </p>
+        </div>
+        <div className="grid gap-3 rounded-[8px] border border-line bg-surface p-4">
+          <p className="text-sm font-semibold">Tipos de menú disponibles</p>
+          <div className="flex flex-wrap gap-4">
+            <label className="flex items-center gap-3 text-sm font-medium">
+              <input
+                type="checkbox"
+                {...register("vegetarianMenuAvailable")}
+                className="h-5 w-5 accent-olive"
+              />
+              Vegetariano
+            </label>
+            <label className="flex items-center gap-3 text-sm font-medium">
+              <input
+                type="checkbox"
+                {...register("omnivoreMenuAvailable")}
+                className="h-5 w-5 accent-olive"
+              />
+              Omnívoro
+            </label>
+          </div>
         </div>
         <div className="grid gap-4 md:grid-cols-3">
           <Field
@@ -252,6 +284,41 @@ export function ProjectForm({ project }: { project?: Project }) {
               type="number"
               step="1"
               {...register("breakfastPricePerDay", { valueAsNumber: true })}
+              className="min-h-11 rounded-[8px] border border-line bg-surface px-3"
+            />
+          </Field>
+          <Field
+            label="Comida · precio por día"
+            error={errors.lunchPricePerDay?.message}
+          >
+            <input
+              type="number"
+              step="1"
+              {...register("lunchPricePerDay", { valueAsNumber: true })}
+              className="min-h-11 rounded-[8px] border border-line bg-surface px-3"
+            />
+          </Field>
+          <Field
+            label="Cena · precio por día"
+            error={errors.dinnerPricePerDay?.message}
+          >
+            <input
+              type="number"
+              step="1"
+              {...register("dinnerPricePerDay", { valueAsNumber: true })}
+              className="min-h-11 rounded-[8px] border border-line bg-surface px-3"
+            />
+          </Field>
+          <Field
+            label="Coffee corner · precio por día"
+            error={errors.coffeeCornerPricePerDay?.message}
+          >
+            <input
+              type="number"
+              step="1"
+              {...register("coffeeCornerPricePerDay", {
+                valueAsNumber: true,
+              })}
               className="min-h-11 rounded-[8px] border border-line bg-surface px-3"
             />
           </Field>

@@ -1,4 +1,5 @@
 import { CalendarDays } from "lucide-react";
+import { MonthlyCalendar } from "@/components/admin/monthly-calendar";
 import { getAdminProjects } from "@/data/projects";
 
 export default async function CalendarPage() {
@@ -7,6 +8,7 @@ export default async function CalendarPage() {
   return (
     <div className="grid gap-6">
       <h1 className="font-serif text-4xl font-semibold">Calendario</h1>
+      <MonthlyCalendar projects={projects} />
       <div className="grid gap-4">
         {projects.map((project) => (
           <article key={project.id} className="flex gap-4 rounded-[8px] border border-line bg-surface p-5">
