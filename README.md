@@ -1,23 +1,21 @@
 # Programa de Colaboración · El Mas de Borràs
 
-Demo navegable de Fase 1 para una plataforma de colaboración con proyectos,
-fechas, cupos, modalidades, solicitudes y áreas simuladas de participante y
-administración.
+Demo navegable para una plataforma de colaboración con proyectos, fechas,
+cupos, modalidades, solicitudes, áreas de participante y administración.
 
-## Estado de esta fase
+## Estado actual
 
 - App Next.js App Router con TypeScript estricto y Tailwind CSS.
-- Datos mock centralizados en `src/data/mock.ts`.
-- Tipos de dominio en `src/domain/collaboration`.
-- Validación con Zod y formulario admin con React Hook Form.
-- Preparación para Supabase en `src/lib/supabase`.
 - Supabase Auth y clientes SSR/browser preparados.
 - Migración SQL inicial con tablas, seeds y políticas RLS en `supabase/migrations`.
+- Datos mock de respaldo en `src/data/mock.ts` cuando no hay variables Supabase.
+- Tipos de dominio en `src/domain/collaboration`.
+- Validación con Zod y formulario admin con React Hook Form.
+- Mensajes en formato conversaciones y calendario mensual admin.
 - Abstracciones de notificaciones en `src/lib/notifications`.
 - Manifest básico para futura PWA.
 
-No hay pagos reales, reservas confirmadas, envío de correos ni base de datos en
-esta fase.
+No hay pagos reales, reservas confirmadas ni envío de correos reales todavía.
 
 ## Ejecutar en local
 
@@ -69,9 +67,9 @@ La migración inicial crea el esquema, RLS y los tres proyectos de ejemplo.
 - `/programa`: explicación del programa.
 - `/proyectos`: listado con filtros.
 - `/proyectos/[slug]`: detalle, modalidad y calculadora estimada.
-- `/acceso` y `/crear-cuenta`: pantallas visuales.
-- `/cuenta`: área simulada del participante.
-- `/admin`: área simulada de administración.
+- `/acceso` y `/crear-cuenta`: autenticación.
+- `/cuenta`: área del participante.
+- `/admin`: área de administración.
 
 ## Documentación
 
