@@ -1,6 +1,7 @@
 "use client";
 
-import { Menu, Sprout, UserRound, X } from "lucide-react";
+import { Menu, UserRound, X } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
@@ -24,12 +25,19 @@ export function SiteHeader() {
         className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-6"
       >
         <Link href="/" className="flex items-center gap-3 font-semibold">
-          <span className="flex h-10 w-10 items-center justify-center rounded-full border border-line bg-surface text-olive">
-            <Sprout className="h-5 w-5" aria-hidden="true" />
+          <span className="relative flex h-11 w-11 overflow-hidden rounded-full border border-line bg-surface">
+            <Image
+              src="/images/mas-borras-logo.png"
+              alt=""
+              fill
+              sizes="44px"
+              className="object-cover"
+              aria-hidden="true"
+            />
           </span>
           <span>
             <span className="block text-sm uppercase tracking-[0.18em] text-muted">
-              Logotipo real
+              Programa de colaboración
             </span>
             <span className="block text-base">El Mas de Borràs</span>
           </span>

@@ -12,6 +12,8 @@ cupos, modalidades, solicitudes, áreas de participante y administración.
 - Tipos de dominio en `src/domain/collaboration`.
 - Validación con Zod y formulario admin con React Hook Form.
 - Mensajes en formato conversaciones y calendario mensual admin.
+- Campos narrativos por proyecto: propósito, nota del responsable, tareas,
+  señales de comunidad y galería opcional.
 - Abstracciones de notificaciones en `src/lib/notifications`.
 - Manifest básico para futura PWA.
 
@@ -74,3 +76,10 @@ La migración inicial crea el esquema, RLS y los tres proyectos de ejemplo.
 ## Documentación
 
 El plan de base de datos y RLS futuro está en `docs/database-plan.md`.
+
+## Fotografías
+
+La demo conserva imágenes remotas de marcador para portada, tarjetas y galerías.
+Cuando haya fotografías reales de Mas Borràs, pueden sustituirse en
+`src/data/mock.ts`, en la tabla `projects` o en el futuro Storage de Supabase.
+Cada imagen debe incluir texto alternativo.

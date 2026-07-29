@@ -12,6 +12,8 @@ export function ProjectCard({ project }: { project: Project }) {
   const dateLabel = project.dates[0]?.label ?? "Fechas por confirmar";
   const hasLodging = project.modalities.some((modality) => modality.lodgingIncluded);
   const placesLeft = project.capacity - project.occupiedPlaces;
+  const confirmedParticipants =
+    project.communityStats?.confirmedParticipants ?? project.occupiedPlaces;
 
   return (
     <article className="overflow-hidden rounded-[8px] border border-line bg-surface soft-shadow">
@@ -52,12 +54,30 @@ export function ProjectCard({ project }: { project: Project }) {
                 : "Cupo completo"}
             </dd>
           </div>
+          {confirmedParticipants > 0 ? (
+            <div className="flex items-center gap-2">
+              <UsersRound className="h-4 w-4 text-olive" aria-hidden="true" />
+              <dt className="sr-only">Participantes confirmados</dt>
+              <dd>{confirmedParticipants} participantes confirmados</dd>
+            </div>
+          ) : null}
           <div className="flex items-center gap-2">
             <Home className="h-4 w-4 text-olive" aria-hidden="true" />
             <dt className="sr-only">Alojamiento</dt>
             <dd>{hasLodging ? "Con opción de alojamiento incluido" : "Condiciones a revisar"}</dd>
           </div>
         </dl>
+        {project.communityStats?.pastParticipants ||
+        project.communityStats?.lastEditionLabel ? (
+          <p className="rounded-[8px] bg-mist px-3 py-2 text-sm leading-6 text-olive-dark">
+            {project.communityStats.pastParticipants
+              ? `${project.communityStats.pastParticipants} personas ya han formado parte`
+              : "Proyecto con recorrido previo"}
+            {project.communityStats.lastEditionLabel
+              ? ` · Última edición: ${project.communityStats.lastEditionLabel}`
+              : ""}
+          </p>
+        ) : null}
         <Link
           href={`/proyectos/${project.slug}`}
           className="mt-1 inline-flex min-h-11 items-center justify-center rounded-full border border-olive px-5 text-sm font-semibold text-olive-dark transition hover:bg-mist"

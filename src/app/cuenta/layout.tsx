@@ -9,7 +9,7 @@ import { createSupabaseServerClient } from "@/lib/supabase/server";
 export const dynamic = "force-dynamic";
 
 const participantItems = [
-  { href: "/cuenta", label: "Inicio", icon: "home" },
+  { href: "/cuenta", label: "Mi espacio", icon: "home" },
   { href: "/proyectos", label: "Explorar proyectos", icon: "compass" },
   { href: "/cuenta/solicitudes", label: "Mis solicitudes", icon: "inbox" },
   { href: "/cuenta/estancias", label: "Mis estancias", icon: "home" },
@@ -30,7 +30,7 @@ export default async function AccountLayout({ children }: { children: ReactNode 
     <>
       <SiteHeader />
       <main className="mx-auto grid w-full max-w-6xl flex-1 gap-6 px-4 py-8 sm:px-6 md:grid-cols-[17rem_1fr]">
-        <AreaNav title="Área participante" items={participantItems} />
+        <AreaNav title="Mi espacio" items={participantItems} />
         <div className="grid gap-4">
           {supabase && user ? (
             <form action={signOutAction} className="flex justify-end">

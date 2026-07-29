@@ -25,14 +25,15 @@ export default async function AccountHomePage({
     <div className="grid gap-6">
       <div>
         <p className="text-sm font-semibold uppercase tracking-[0.18em] text-terracotta">
-          Inicio
+          Mi camino en Mas Borràs
         </p>
         <h1 className="mt-2 font-serif text-4xl font-semibold">
-          Hola, {profile.firstName}
+          Bienvenida de nuevo, {profile.firstName}.
         </h1>
         <p className="mt-3 max-w-2xl leading-7 text-muted">
-          Esta área privada es simulada. Aquí se reunirán tus solicitudes,
-          estancias aceptadas, mensajes, recursos y perfil permanente.
+          Aquí puedes seguir tus solicitudes y preparar tus próximas estancias en
+          Mas Borràs. Tu perfil guarda lo esencial para no repetirlo cada vez que
+          una nueva colaboración te llame.
         </p>
       </div>
       {error === "admin" ? (
@@ -41,7 +42,7 @@ export default async function AccountHomePage({
         </p>
       ) : null}
 
-      <section className="grid gap-4 md:grid-cols-3">
+      <section aria-label="Resumen de tu participación" className="grid gap-4 md:grid-cols-3">
         <Metric icon={Inbox} label="Solicitudes" value={applications.length} />
         <Metric icon={CalendarDays} label="Estancias" value={stays.length} />
         <Metric icon={MessageSquare} label="Mensajes sin leer" value={messages.filter((message) => !message.read).length} />
@@ -50,8 +51,8 @@ export default async function AccountHomePage({
       <section className="rounded-[8px] border border-line bg-surface p-5">
         <h2 className="font-serif text-3xl font-semibold">Próximo paso</h2>
         <p className="mt-3 leading-7 text-muted">
-          Revisa tus solicitudes o completa los datos que falten en tu perfil
-          para reutilizarlos en futuras solicitudes.
+          Revisa cómo va tu participación o completa con calma los datos que
+          faltan en tu perfil.
         </p>
         <div className="mt-5 flex flex-wrap gap-3">
           <Link className="rounded-full bg-olive px-5 py-3 text-sm font-semibold text-white" href="/cuenta/solicitudes">

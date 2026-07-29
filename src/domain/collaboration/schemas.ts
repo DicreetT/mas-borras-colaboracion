@@ -4,6 +4,15 @@ export const projectFormSchema = z.object({
   title: z.string().min(4, "Añade un título más descriptivo."),
   type: z.enum(["community_legacy", "specialized_maintenance"]),
   summary: z.string().min(20, "Describe el propósito del proyecto."),
+  heroImageUrl: z
+    .string()
+    .url("Usa una URL válida o sube una imagen desde tu equipo.")
+    .optional()
+    .or(z.literal("")),
+  imageAlt: z.string().min(8, "Describe brevemente la imagen de portada."),
+  purpose: z.string().optional(),
+  coordinatorMessage: z.string().optional(),
+  tasksText: z.string().optional(),
   difficulty: z.enum(["light", "moderate", "project_based"]),
   capacity: z.number().int().min(1).max(30),
   startDate: z.string().optional(),

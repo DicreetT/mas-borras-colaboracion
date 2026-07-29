@@ -35,6 +35,16 @@ export default async function ApplicationsPage() {
               <p className="mt-4 text-sm text-muted">
                 Estimación: {formatMoney(application.estimatedAmountCents)}
               </p>
+              {application.motivation ? (
+                <div className="mt-4 rounded-[8px] bg-mist p-4">
+                  <p className="text-sm font-semibold text-olive-dark">
+                    Lo que te llevó a participar
+                  </p>
+                  <p className="mt-2 text-sm leading-6 text-muted">
+                    {application.motivation}
+                  </p>
+                </div>
+              ) : null}
             </article>
           );
         })}

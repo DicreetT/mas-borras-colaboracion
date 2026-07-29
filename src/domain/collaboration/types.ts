@@ -56,6 +56,19 @@ export interface WorkScheduleOption {
   description: string;
 }
 
+export interface ProjectGalleryImage {
+  id: string;
+  src: string;
+  alt: string;
+  caption?: string;
+}
+
+export interface ProjectCommunityStats {
+  confirmedParticipants?: number;
+  pastParticipants?: number;
+  lastEditionLabel?: string;
+}
+
 export interface Profile {
   id: string;
   role: Role;
@@ -117,12 +130,17 @@ export interface Project {
   status: ProjectStatus;
   summary: string;
   description: string;
+  purpose?: string;
+  coordinatorMessage?: string;
   difficulty: Difficulty;
   capacity: number;
   occupiedPlaces: number;
   location: string;
   heroImage: string;
   imageAlt: string;
+  gallery?: ProjectGalleryImage[];
+  communityStats?: ProjectCommunityStats;
+  tasks?: string[];
   requirements: string[];
   includes: string[];
   dates: ProjectDate[];
@@ -140,7 +158,9 @@ export interface Application {
   estimatedAmountCents: number | null;
   nights: number;
   menuDays: number;
+  motivation?: string;
   notes?: string;
+  internalNotes?: string;
 }
 
 export interface Stay {

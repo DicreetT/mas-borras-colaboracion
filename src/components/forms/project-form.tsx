@@ -1,10 +1,10 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Save } from "lucide-react";
-import type { ReactNode } from "react";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
+import { ImagePlus, Save, X } from "lucide-react";
+import type { ChangeEvent, ReactNode } from "react";
+import { useEffect, useState } from "react";
+import { useForm, useWatch } from "react-hook-form";
 import {
   projectFormSchema,
   type ProjectFormValues,
@@ -15,6 +15,11 @@ const defaultValues: ProjectFormValues = {
   title: "",
   type: "community_legacy",
   summary: "",
+  heroImageUrl: "",
+  imageAlt: "Paisaje natural de El Mas de Borràs",
+  purpose: "",
+  coordinatorMessage: "",
+  tasksText: "",
   difficulty: "light",
   capacity: 6,
   startDate: "",
@@ -38,11 +43,18 @@ const defaultValues: ProjectFormValues = {
 
 export function ProjectForm({ project }: { project?: Project }) {
   const [saved, setSaved] = useState(false);
+  const [coverPreviewUrl, setCoverPreviewUrl] = useState<string | null>(null);
+  const [selectedImageName, setSelectedImageName] = useState<string | null>(null);
   const initialValues: ProjectFormValues = project
     ? {
         title: project.title,
         type: project.type,
         summary: project.summary,
+        heroImageUrl: project.heroImage,
+        imageAlt: project.imageAlt,
+        purpose: project.purpose ?? "",
+        coordinatorMessage: project.coordinatorMessage ?? "",
+        tasksText: project.tasks?.join("\n") ?? "",
         difficulty: project.difficulty,
         capacity: project.capacity,
         startDate: project.dates[0]?.startDate ?? "",
@@ -85,11 +97,43 @@ export function ProjectForm({ project }: { project?: Project }) {
   const {
     register,
     handleSubmit,
+    setValue,
+    control,
     formState: { errors },
   } = useForm<ProjectFormValues>({
     resolver: zodResolver(projectFormSchema),
     defaultValues: initialValues,
   });
+
+  const heroImageUrl = useWatch({ control, name: "heroImageUrl" });
+  const previewImage = coverPreviewUrl ?? heroImageUrl;
+
+  useEffect(() => {
+    return () => {
+      if (coverPreviewUrl) {
+        URL.revokeObjectURL(coverPreviewUrl);
+      }
+    };
+  }, [coverPreviewUrl]);
+
+  function handleCoverChange(event: ChangeEvent<HTMLInputElement>) {
+    const file = event.target.files?.[0];
+
+    if (!file) {
+      return;
+    }
+
+    const previewUrl = URL.createObjectURL(file);
+    setCoverPreviewUrl(previewUrl);
+    setSelectedImageName(file.name);
+    setValue("heroImageUrl", "", { shouldDirty: true, shouldValidate: true });
+    setSaved(false);
+  }
+
+  function clearUploadedCover() {
+    setCoverPreviewUrl(null);
+    setSelectedImageName(null);
+  }
 
   function onSubmit() {
     setSaved(true);
@@ -136,6 +180,124 @@ export function ProjectForm({ project }: { project?: Project }) {
           className="rounded-[8px] border border-line bg-background px-3 py-2"
         />
       </Field>
+
+      <section className="grid gap-4 rounded-[8px] border border-line bg-background p-4">
+        <div>
+          <h2 className="text-lg font-semibold">Sentido de la estancia</h2>
+          <p className="mt-1 text-sm leading-6 text-muted">
+            Estos textos aparecen en la ficha pública antes de requisitos y
+            condiciones. Ayudan a que la persona entienda por qué existe el
+            proyecto.
+          </p>
+        </div>
+        <Field label="¿Por qué existe esta estancia?" error={errors.purpose?.message}>
+          <textarea
+            {...register("purpose")}
+            rows={4}
+            className="rounded-[8px] border border-line bg-surface px-3 py-2"
+          />
+        </Field>
+        <Field
+          label="Una nota de quien acompaña esta estancia"
+          error={errors.coordinatorMessage?.message}
+        >
+          <textarea
+            {...register("coordinatorMessage")}
+            rows={3}
+            className="rounded-[8px] border border-line bg-surface px-3 py-2"
+          />
+        </Field>
+        <Field label="Tareas previstas" error={errors.tasksText?.message}>
+          <textarea
+            {...register("tasksText")}
+            rows={4}
+            placeholder="Una tarea por línea"
+            className="rounded-[8px] border border-line bg-surface px-3 py-2"
+          />
+        </Field>
+      </section>
+
+      <section className="grid gap-4 rounded-[8px] border border-line bg-background p-4">
+        <div>
+          <h2 className="text-lg font-semibold">Imagen de presentación</h2>
+          <p className="mt-1 text-sm leading-6 text-muted">
+            Sube una imagen de portada o pega una URL temporal. Más adelante se
+            guardará en Supabase Storage y actualizará la ficha pública del
+            proyecto.
+          </p>
+        </div>
+        <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_18rem]">
+          <div className="grid gap-4">
+            <Field label="Subir portada desde el equipo">
+              <span className="grid gap-3 rounded-[8px] border border-dashed border-line bg-surface p-4">
+                <span className="inline-flex items-center gap-2 text-sm font-semibold text-olive-dark">
+                  <ImagePlus className="h-4 w-4" aria-hidden="true" />
+                  Seleccionar imagen
+                </span>
+                <input
+                  type="file"
+                  accept="image/png,image/jpeg,image/webp"
+                  onChange={handleCoverChange}
+                  className="text-sm file:mr-4 file:min-h-10 file:rounded-full file:border-0 file:bg-olive file:px-4 file:text-sm file:font-semibold file:text-white hover:file:bg-olive-dark"
+                />
+                <span className="text-xs leading-5 text-muted">
+                  Recomendado: horizontal, al menos 1600 px de ancho, JPG, PNG o
+                  WebP. No se sube todavía al servidor en esta demo.
+                </span>
+              </span>
+            </Field>
+            {selectedImageName ? (
+              <div className="flex flex-wrap items-center justify-between gap-3 rounded-[8px] border border-line bg-surface p-3 text-sm">
+                <span className="font-medium">{selectedImageName}</span>
+                <button
+                  type="button"
+                  onClick={clearUploadedCover}
+                  className="inline-flex min-h-9 items-center gap-2 rounded-full border border-line px-3 font-semibold text-olive-dark hover:bg-mist"
+                >
+                  <X className="h-4 w-4" aria-hidden="true" />
+                  Quitar vista previa
+                </button>
+              </div>
+            ) : null}
+            <Field label="URL de portada" error={errors.heroImageUrl?.message}>
+              <input
+                type="url"
+                placeholder="https://..."
+                {...register("heroImageUrl")}
+                className="min-h-11 rounded-[8px] border border-line bg-surface px-3"
+              />
+            </Field>
+            <Field label="Texto alternativo" error={errors.imageAlt?.message}>
+              <input
+                {...register("imageAlt")}
+                className="min-h-11 rounded-[8px] border border-line bg-surface px-3"
+              />
+            </Field>
+          </div>
+          <div className="grid gap-2">
+            <p className="text-sm font-medium">Vista previa</p>
+            <div
+              className="relative aspect-[4/3] overflow-hidden rounded-[8px] border border-line bg-surface-soft"
+              aria-label="Vista previa de la imagen de presentación"
+              style={
+                previewImage
+                  ? {
+                      backgroundImage: `linear-gradient(180deg, rgba(33, 26, 18, 0.08), rgba(33, 26, 18, 0.18)), url("${previewImage}")`,
+                      backgroundPosition: "center",
+                      backgroundSize: "cover",
+                    }
+                  : undefined
+              }
+            >
+              {!previewImage ? (
+                <div className="flex h-full items-center justify-center p-6 text-center text-sm leading-6 text-muted">
+                  La portada aparecerá aquí.
+                </div>
+              ) : null}
+            </div>
+          </div>
+        </div>
+      </section>
 
       <div className="grid gap-4 md:grid-cols-3">
         <Field label="Dificultad" error={errors.difficulty?.message}>

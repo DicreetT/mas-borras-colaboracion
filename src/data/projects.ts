@@ -2,6 +2,7 @@ import { mockProjects } from "@/data/mock";
 import type {
   MealPlanType,
   Project,
+  ProjectGalleryImage,
   ProjectModality,
   RoomType,
 } from "@/domain/collaboration/types";
@@ -15,12 +16,19 @@ type DbProjectWithRelations = {
   status: Project["status"];
   summary: string;
   description: string;
+  purpose?: string | null;
+  coordinator_message?: string | null;
   difficulty: Project["difficulty"];
   capacity: number;
   occupied_places: number;
   location: string;
   hero_image: string | null;
   image_alt: string | null;
+  gallery_images?: ProjectGalleryImage[] | null;
+  confirmed_participants?: number | null;
+  past_participants?: number | null;
+  last_edition_label?: string | null;
+  tasks?: string[] | null;
   requirements: string[];
   includes: string[];
   published_at: string | null;
@@ -182,12 +190,21 @@ function mapProject(project: DbProjectWithRelations): Project {
     status: project.status,
     summary: project.summary,
     description: project.description,
+    purpose: project.purpose ?? undefined,
+    coordinatorMessage: project.coordinator_message ?? undefined,
     difficulty: project.difficulty,
     capacity: project.capacity,
     occupiedPlaces: project.occupied_places,
     location: project.location,
     heroImage: project.hero_image ?? "",
     imageAlt: project.image_alt ?? project.title,
+    gallery: project.gallery_images ?? undefined,
+    communityStats: {
+      confirmedParticipants: project.confirmed_participants ?? project.occupied_places,
+      pastParticipants: project.past_participants ?? undefined,
+      lastEditionLabel: project.last_edition_label ?? undefined,
+    },
+    tasks: project.tasks ?? undefined,
     requirements: project.requirements,
     includes: project.includes,
     publishedAt: project.published_at ?? undefined,

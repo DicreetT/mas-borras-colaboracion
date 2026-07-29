@@ -1,5 +1,6 @@
 import { CheckCircle2 } from "lucide-react";
 import { SectionHeading } from "@/components/layout/section-heading";
+import { ProgramPhilosophy } from "@/components/program/program-philosophy";
 
 const principles = [
   "Las plazas se solicitan y se revisan; no son reservas automáticas.",
@@ -27,18 +28,28 @@ export default function ProgramPage() {
             archivo, biblioteca, transcripción, digitalización, apoyo en
             encuentros y semanas de cuidado compartido.
           </p>
+          <p className="mt-4 text-sm leading-6 text-muted">
+            Para personas que desean aportar presencia, orden, escucha y manos
+            al cuidado cotidiano del lugar.
+          </p>
         </div>
         <div className="rounded-[8px] border border-line bg-surface p-6">
           <h2 className="font-serif text-3xl font-semibold">
-            Cuidado especializado
+            Cuidado y mantenimiento especializado
           </h2>
           <p className="mt-4 leading-7 text-muted">
             Colaboraciones de carpintería, fontanería, pintura, restauración,
             albañilería o mantenimiento exterior. Siempre con revisión
             individual y condiciones acordadas.
           </p>
+          <p className="mt-4 rounded-[8px] bg-mist p-3 text-sm leading-6 text-olive-dark">
+            Algunas tareas requieren experiencia previa o una conversación con
+            el equipo antes de confirmar la participación.
+          </p>
         </div>
       </section>
+
+      <ProgramPhilosophy />
 
       <section className="mt-12 rounded-[8px] border border-line bg-surface-soft p-6">
         <h2 className="font-serif text-3xl font-semibold">Criterios base</h2>

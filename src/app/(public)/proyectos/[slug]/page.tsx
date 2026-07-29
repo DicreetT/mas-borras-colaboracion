@@ -2,7 +2,9 @@ import { ArrowLeft, CalendarDays, Home, UsersRound } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { ApplicationMotivationPrompt } from "@/components/project/application-motivation-prompt";
 import { ModalityCalculator } from "@/components/project/modality-calculator";
+import { ProjectGallery } from "@/components/project/project-gallery";
 import { Badge } from "@/components/ui/badge";
 import { ButtonLink } from "@/components/ui/button-link";
 import { mockProjects } from "@/data/mock";
@@ -65,6 +67,28 @@ export default async function ProjectDetailPage({
 
       <div className="mt-10 grid gap-8 lg:grid-cols-[1fr_26rem]">
         <article className="grid gap-8">
+          {project.purpose ? (
+            <section className="rounded-[8px] border border-line bg-surface p-6">
+              <h2 className="font-serif text-3xl font-semibold">
+                ¿Por qué existe esta estancia?
+              </h2>
+              <p className="mt-4 max-w-3xl leading-8 text-muted">
+                {project.purpose}
+              </p>
+            </section>
+          ) : null}
+
+          {project.coordinatorMessage ? (
+            <section className="rounded-[8px] border border-line bg-surface-soft p-6">
+              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-terracotta">
+                Una nota de quien acompaña esta estancia
+              </p>
+              <p className="mt-4 max-w-3xl font-serif text-2xl leading-9 text-foreground">
+                “{project.coordinatorMessage}”
+              </p>
+            </section>
+          ) : null}
+
           <section className="rounded-[8px] border border-line bg-surface p-6">
             <h2 className="font-serif text-3xl font-semibold">Detalle</h2>
             <p className="mt-4 leading-8 text-muted">{project.description}</p>
@@ -91,7 +115,75 @@ export default async function ProjectDetailPage({
                 </div>
               </div>
             </dl>
+            <dl className="mt-6 grid gap-3 border-t border-line pt-5 text-sm text-muted sm:grid-cols-3">
+              <div>
+                <dt className="font-semibold text-foreground">
+                  Plazas disponibles
+                </dt>
+                <dd>
+                  {Math.max(project.capacity - project.occupiedPlaces, 0)} de{" "}
+                  {project.capacity}
+                </dd>
+              </div>
+              <div>
+                <dt className="font-semibold text-foreground">
+                  Participantes confirmados
+                </dt>
+                <dd>
+                  {project.communityStats?.confirmedParticipants ??
+                    project.occupiedPlaces}
+                </dd>
+              </div>
+              <div>
+                <dt className="font-semibold text-foreground">
+                  Estado del proyecto
+                </dt>
+                <dd>{project.status === "published" ? "Publicado" : project.status}</dd>
+              </div>
+              {project.communityStats?.pastParticipants ? (
+                <div>
+                  <dt className="font-semibold text-foreground">
+                    Recorrido compartido
+                  </dt>
+                  <dd>
+                    {project.communityStats.pastParticipants} personas ya han
+                    formado parte
+                  </dd>
+                </div>
+              ) : null}
+              {project.communityStats?.lastEditionLabel ? (
+                <div>
+                  <dt className="font-semibold text-foreground">
+                    Última edición
+                  </dt>
+                  <dd>{project.communityStats.lastEditionLabel}</dd>
+                </div>
+              ) : null}
+              <div>
+                <dt className="font-semibold text-foreground">Próxima fecha</dt>
+                <dd>{project.dates[0]?.label ?? "Por confirmar"}</dd>
+              </div>
+            </dl>
+            {project.type === "specialized_maintenance" ? (
+              <p className="mt-6 rounded-[8px] border border-line bg-mist p-4 text-sm leading-6 text-olive-dark">
+                Algunas tareas requieren experiencia previa o una conversación
+                con el equipo antes de confirmar la participación.
+              </p>
+            ) : null}
           </section>
+
+          {project.tasks?.length ? (
+            <section className="rounded-[8px] border border-line bg-surface p-6">
+              <h2 className="font-serif text-3xl font-semibold">
+                Tareas previstas
+              </h2>
+              <ul className="mt-4 grid gap-3 text-sm leading-6 text-muted">
+                {project.tasks.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            </section>
+          ) : null}
 
           <section className="grid gap-6 md:grid-cols-2">
             <div className="rounded-[8px] border border-line bg-surface p-6">
@@ -111,10 +203,13 @@ export default async function ProjectDetailPage({
               </ul>
             </div>
           </section>
+
+          <ProjectGallery images={project.gallery} />
         </article>
 
         <div className="grid h-fit gap-5 lg:sticky lg:top-24">
           <ModalityCalculator project={project} />
+          <ApplicationMotivationPrompt />
           <ButtonLink href="/acceso" className="w-full">
             Solicitar plaza
           </ButtonLink>

@@ -113,7 +113,9 @@ export async function getCurrentApplications(): Promise<Application[]> {
     estimatedAmountCents: application.estimated_amount_cents,
     nights: application.nights,
     menuDays: application.meal_days,
+    motivation: application.motivation ?? undefined,
     notes: application.notes ?? undefined,
+    internalNotes: application.internal_notes ?? undefined,
   }));
 }
 

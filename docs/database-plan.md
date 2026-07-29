@@ -22,6 +22,30 @@ entorno locales.
 - `notifications`
 - `admin_roles`
 
+## Campos narrativos añadidos
+
+La mejora de contenido prepara estos campos opcionales para mantener
+compatibilidad con registros antiguos:
+
+- `projects.purpose`: por qué existe la estancia.
+- `projects.coordinator_message`: nota breve de quien acompaña el proyecto.
+- `projects.gallery_images`: lista JSON de 1 a 6 imágenes con `id`, `src`,
+  `alt` y `caption` opcional. En una fase posterior puede normalizarse o
+  vincularse a Supabase Storage.
+- `projects.tasks`: tareas concretas previstas para la estancia.
+- `projects.confirmed_participants`: participantes confirmados mostrados con
+  tono informativo, no comercial.
+- `projects.past_participants`: personas que ya participaron anteriormente.
+- `projects.last_edition_label`: etiqueta humana de última edición.
+- `applications.motivation`: respuesta opcional del participante a “¿Qué te ha
+  llevado a querer participar en esta estancia?”.
+- `applications.internal_notes`: notas privadas del equipo administrador.
+
+La migración preparada es
+`supabase/migrations/20260729212000_project_story_and_application_motivation.sql`.
+No requiere claves nuevas y no debe ejecutarse sin revisar primero el entorno
+de Supabase.
+
 ## Supabase
 
 Variables previstas:
@@ -41,6 +65,8 @@ La service role key debe usarse solo en servidor y nunca exponerse al navegador.
 - `owner` heredará permisos de admin y podrá gestionar roles, configuración y plantillas.
 - Las solicitudes especializadas deberán quedar en revisión y no confirmar plaza sin acción administrativa.
 - Las solicitudes deberán guardar la modalidad elegida y sus opciones seleccionadas: habitación, régimen de comidas, días de comida y ritmo de colaboración.
+- Las solicitudes podrán guardar una motivación personal opcional visible para
+  administración y para la persona antes de enviar.
 - Los mensajes y recursos deberán filtrar por destinatario, proyecto o estancia confirmada.
 
 ## Estados

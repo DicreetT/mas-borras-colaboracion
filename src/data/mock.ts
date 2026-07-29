@@ -84,6 +84,10 @@ export const mockProjects: Project[] = [
       "Estancia tranquila para ordenar, transcribir y clasificar materiales vinculados al legado de las enseñanzas.",
     description:
       "Un proyecto pensado para antiguos alumnos y colaboradores que deseen cuidar el archivo vivo de El Mas de Borràs. El trabajo se centra en audios, textos, documentos y materiales que necesitan escucha, criterio y constancia.",
+    purpose:
+      "Durante décadas se grabaron encuentros, conversaciones y enseñanzas compartidas en Mas Borràs. Esta estancia nace para escuchar, transcribir, ordenar y preservar ese archivo, de modo que futuras generaciones puedan seguir accediendo a él con respeto.",
+    coordinatorMessage:
+      "Buscamos personas pacientes, cuidadosas y capaces de trabajar con atención. No es necesario tener experiencia profesional, pero sí respeto por el material y constancia.",
     difficulty: "light",
     capacity: 6,
     occupiedPlaces: 3,
@@ -91,6 +95,30 @@ export const mockProjects: Project[] = [
     heroImage:
       "https://images.unsplash.com/photo-1516979187457-637abb4f9353?auto=format&fit=crop&w=1600&q=80",
     imageAlt: "Mesa de madera con libros y cuadernos en una estancia serena",
+    gallery: [
+      {
+        id: "gallery-archivo-1",
+        src: "https://images.unsplash.com/photo-1516979187457-637abb4f9353?auto=format&fit=crop&w=1200&q=80",
+        alt: "Libros y cuadernos sobre una mesa de trabajo tranquila",
+        caption: "Materiales que esperan escucha, orden y cuidado.",
+      },
+      {
+        id: "gallery-archivo-2",
+        src: "https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?auto=format&fit=crop&w=1200&q=80",
+        alt: "Espacio de trabajo con ordenador y cuadernos",
+        caption: "Trabajo silencioso de transcripción y clasificación.",
+      },
+    ],
+    communityStats: {
+      confirmedParticipants: 3,
+      pastParticipants: 12,
+      lastEditionLabel: "mayo de 2026",
+    },
+    tasks: [
+      "Escuchar y revisar audios seleccionados.",
+      "Transcribir fragmentos y organizar textos por tema.",
+      "Clasificar materiales con criterios comunes del archivo.",
+    ],
     requirements: [
       "Relación previa con las enseñanzas o sensibilidad hacia su contexto.",
       "Cuidado en el tratamiento de materiales personales y de archivo.",
@@ -282,6 +310,10 @@ export const mockProjects: Project[] = [
       "Una semana de trabajo comunitario para cuidar caminos, jardín y zonas exteriores con ritmo pausado.",
     description:
       "Durante varios días se alternan tareas de jardín, pequeñas labores de cuidado del entorno y momentos compartidos. La propuesta está orientada a personas que quieran colaborar con presencia, sencillez y respeto por el lugar.",
+    purpose:
+      "El jardín acompaña la vida cotidiana de Mas Borràs. Cada temporada necesita cuidados distintos para seguir siendo un espacio de descanso, encuentro y contemplación.",
+    coordinatorMessage:
+      "Trabajaremos en un grupo pequeño y alternaremos las tareas del jardín con momentos compartidos y tiempo libre.",
     difficulty: "moderate",
     capacity: 6,
     occupiedPlaces: 4,
@@ -289,6 +321,30 @@ export const mockProjects: Project[] = [
     heroImage:
       "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&w=1600&q=80",
     imageAlt: "Manos trabajando con plantas en un jardín",
+    gallery: [
+      {
+        id: "gallery-jardin-1",
+        src: "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&w=1200&q=80",
+        alt: "Manos cuidando plantas en tierra",
+        caption: "Cuidado estacional del jardín y de los exteriores.",
+      },
+      {
+        id: "gallery-jardin-2",
+        src: "https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?auto=format&fit=crop&w=1200&q=80",
+        alt: "Sendero de jardín rodeado de vegetación",
+        caption: "Caminos y zonas de pausa para mantener vivos.",
+      },
+    ],
+    communityStats: {
+      confirmedParticipants: 4,
+      pastParticipants: 18,
+      lastEditionLabel: "primavera de 2026",
+    },
+    tasks: [
+      "Cuidar caminos, plantas y zonas exteriores.",
+      "Preparar pequeñas mejoras del jardín según la temporada.",
+      "Ordenar herramientas y cerrar cada jornada con el grupo.",
+    ],
     requirements: [
       "Disposición para tareas exteriores ligeras o moderadas.",
       "Ropa cómoda y calzado adecuado.",
@@ -353,13 +409,17 @@ export const mockProjects: Project[] = [
   {
     id: "project-carpinteria",
     slug: "colaboracion-especializada-carpinteria",
-    title: "Colaboración especializada en carpintería",
+    title: "Restauración de elementos de madera",
     type: "specialized_maintenance",
     status: "published",
     summary:
       "Colaboración revisada individualmente para personas con experiencia real en carpintería y restauración.",
     description:
       "Proyecto sujeto a conversación previa, revisión de experiencia y acuerdo específico. No es una plaza automática: el equipo definirá tareas, tiempos, alojamiento y condiciones según necesidades reales del Mas.",
+    purpose:
+      "Algunas puertas, ventanas y muebles forman parte de la historia material del lugar. Esta estancia busca restaurarlos sin borrar las huellas que los años han dejado en ellos.",
+    coordinatorMessage:
+      "Este proyecto requiere experiencia en carpintería, restauración o trabajos similares. Antes de confirmar la participación tendremos una conversación breve.",
     difficulty: "project_based",
     capacity: 2,
     occupiedPlaces: 0,
@@ -367,6 +427,30 @@ export const mockProjects: Project[] = [
     heroImage:
       "https://images.unsplash.com/photo-1504148455328-c376907d081c?auto=format&fit=crop&w=1600&q=80",
     imageAlt: "Herramientas de carpintería sobre una mesa de trabajo",
+    gallery: [
+      {
+        id: "gallery-carpinteria-1",
+        src: "https://images.unsplash.com/photo-1504148455328-c376907d081c?auto=format&fit=crop&w=1200&q=80",
+        alt: "Herramientas de carpintería sobre una mesa",
+        caption: "Intervenciones pequeñas, cuidadosas y revisadas.",
+      },
+      {
+        id: "gallery-carpinteria-2",
+        src: "https://images.unsplash.com/photo-1601058268499-e52658b8bb88?auto=format&fit=crop&w=1200&q=80",
+        alt: "Detalle de madera trabajada en taller",
+        caption: "Restaurar sin borrar la memoria del material.",
+      },
+    ],
+    communityStats: {
+      confirmedParticipants: 0,
+      pastParticipants: 5,
+      lastEditionLabel: "invierno de 2025",
+    },
+    tasks: [
+      "Revisar elementos de madera que necesitan intervención.",
+      "Restaurar puertas, ventanas o muebles según prioridad.",
+      "Acordar materiales, tiempos y alcance antes de confirmar.",
+    ],
     requirements: [
       "Experiencia demostrable en carpintería, restauración o mantenimiento.",
       "Descripción clara de trabajos previos y disponibilidad.",
@@ -476,7 +560,10 @@ export const mockApplications: Application[] = [
     estimatedAmountCents: 21000,
     nights: 5,
     menuDays: 5,
+    motivation:
+      "Quiero volver al Mas desde un lugar tranquilo y aportar algo concreto al cuidado de las enseñanzas que recibí allí.",
     notes: "Interés especial en transcripción de audios.",
+    internalNotes: "Puede ayudar con criterios de clasificación y revisión de textos.",
   },
   {
     id: "app-jardin-ana",
@@ -488,6 +575,9 @@ export const mockApplications: Application[] = [
     estimatedAmountCents: 9600,
     nights: 4,
     menuDays: 4,
+    motivation:
+      "Me apetece colaborar al aire libre y compartir unos días de trabajo sencillo con otras personas.",
+    internalNotes: "Revisar disponibilidad de habitación compartida.",
   },
 ];
 

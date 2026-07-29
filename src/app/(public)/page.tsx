@@ -2,6 +2,7 @@ import { ArrowRight, CalendarCheck, HandHeart, Trees } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { ProjectCard } from "@/components/project/project-card";
+import { ProgramPhilosophy } from "@/components/program/program-philosophy";
 import { ButtonLink } from "@/components/ui/button-link";
 import { getPublishedProjects } from "@/data/projects";
 
@@ -12,8 +13,8 @@ export default async function HomePage() {
     <div className="content-grid">
       <section className="full-bleed relative min-h-[88svh] overflow-hidden">
         <Image
-          src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1800&q=80"
-          alt="Masía rodeada de naturaleza al atardecer"
+          src="/images/mas-borras-home.png"
+          alt="El Mas de Borràs entre montañas y árboles de otoño al atardecer"
           fill
           priority
           sizes="100vw"
@@ -28,16 +29,15 @@ export default async function HomePage() {
             <h1 className="mt-4 font-serif text-5xl font-semibold leading-[1.05] sm:text-7xl">
               Programa de Colaboración
             </h1>
-            <p className="mt-6 max-w-2xl text-lg leading-8 text-[#fff8ed]">
-              Estancias con cupos limitados para cuidar el lugar, su entorno y
-              su legado con calma, sencillez y responsabilidad compartida.
-            </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <ButtonLink href="/proyectos">Explorar proyectos</ButtonLink>
               <ButtonLink href="/programa" tone="secondary">
                 Conocer el programa
               </ButtonLink>
             </div>
+            <p className="mt-3 text-sm leading-6 text-[#f4dfc7]">
+              Encuentra la estancia que resuene contigo.
+            </p>
           </div>
         </div>
       </section>
@@ -98,6 +98,8 @@ export default async function HomePage() {
           ))}
         </div>
       </section>
+
+      <ProgramPhilosophy />
 
       <section className="py-8">
         <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
