@@ -20,7 +20,7 @@ export default async function HomePage() {
               El Mas de Borràs
             </p>
             <h1 className="mt-4 font-serif text-5xl font-semibold leading-[1.05] sm:text-7xl">
-              Programa de Colaboración
+              Estancias Solidarias
             </h1>
             <div className="mt-8 flex flex-wrap gap-3">
               <ButtonLink href="/proyectos">Explorar proyectos</ButtonLink>
